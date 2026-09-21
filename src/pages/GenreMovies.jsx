@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
@@ -46,7 +46,7 @@ function GenreMovies() {
     fetchGenreMovies();
   }, [genreId]);
 
-  const loadMoreMovies = async () => {
+  const loadMoreMovies = useCallback(async () => {
     if (loadingMore || !hasMore) {
       return;
     }
@@ -55,9 +55,7 @@ function GenreMovies() {
       setLoadingMore(true);
 
       const nextPage = page + 1;
-
       console.log("Fetching genre page:", nextPage);
-
       const response = await getMoviesByGenre(genreId, nextPage);
 
       setMovies((previousMovies) => [
@@ -73,7 +71,7 @@ function GenreMovies() {
     } finally {
       setLoadingMore(false);
     }
-  };
+  }, [loadingMore, hasMore, page, genreId]);
 
   // Throttle scroll
   useEffect(() => {
@@ -103,7 +101,7 @@ function GenreMovies() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page, loadingMore, hasMore]);
+  }, [page, loadingMore, hasMore, loadMoreMovies]);
 
   return (
     <div className="min-h-screen bg-[#141414] text-white">

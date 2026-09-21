@@ -20,7 +20,7 @@ function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6">
        
         <Link to="/" className="text-2xl font-bold text-red-600">
-          MOVIE-VERSE
+          MOVIE-FINDER
         </Link>
 
        

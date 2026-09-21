@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
@@ -74,9 +74,9 @@ function MovieCategory() {
     };
 
     fetchCategoryMovies();
-  }, [category]);
+  }, [category, currentCategory]);
 
-  const loadMoreMovies = async () => {
+  const loadMoreMovies = useCallback(async () => {
     if (loadingMore || !hasMore) {
       return;
     }
@@ -103,7 +103,7 @@ function MovieCategory() {
     } finally {
       setLoadingMore(false);
     }
-  };
+  }, [loadingMore, hasMore, page, currentCategory]);
 
   // Throttle scroll event
   useEffect(() => {
@@ -133,7 +133,7 @@ function MovieCategory() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page, loadingMore, hasMore]);
+  }, [page, loadingMore, hasMore, loadMoreMovies]);
 
   if (!currentCategory) {
     return (
