@@ -26,9 +26,7 @@ function MovieCard({ movie }) {
         )}
       </div>
 
-      <h3 className="mt-2 truncate text-sm font-semibold">
-        {movie.title}
-      </h3>
+      <h3 className="mt-2 truncate text-sm font-semibold">{movie.title}</h3>
 
       <div className="mt-1 flex items-center justify-between text-xs text-gray-400">
         <span>⭐ {movie.vote_average?.toFixed(1) || "N/A"}</span>

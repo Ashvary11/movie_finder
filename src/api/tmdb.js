@@ -68,30 +68,53 @@ const fetchWithCache = async (cacheKey, request) => {
   };
 };
 
-export const getPopularMovies = () => {
-  return fetchWithCache("tmdb_popular", () => tmdbApi.get("/movie/popular"));
-};
+// Movie Categories
 
-export const getNowPlayingMovies = () => {
-  return fetchWithCache("tmdb_now_playing", () =>
-    tmdbApi.get("/movie/now_playing"),
+export const getPopularMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_popular_page_${page}`, () =>
+    tmdbApi.get("/movie/popular", {
+      params: {
+        page,
+      },
+    }),
   );
 };
 
-export const getTopRatedMovies = () => {
-  return fetchWithCache("tmdb_top_rated", () =>
-    tmdbApi.get("/movie/top_rated"),
+export const getNowPlayingMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_now_playing_page_${page}`, () =>
+    tmdbApi.get("/movie/now_playing", {
+      params: {
+        page,
+      },
+    }),
   );
 };
 
-export const getUpcomingMovies = () => {
-  return fetchWithCache("tmdb_upcoming", () => tmdbApi.get("/movie/upcoming"));
+export const getTopRatedMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_top_rated_page_${page}`, () =>
+    tmdbApi.get("/movie/top_rated", {
+      params: {
+        page,
+      },
+    }),
+  );
 };
 
-export const getHindiMovies = () => {
-  return fetchWithCache("tmdb_hindi", () =>
+export const getUpcomingMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_upcoming_page_${page}`, () =>
+    tmdbApi.get("/movie/upcoming", {
+      params: {
+        page,
+      },
+    }),
+  );
+};
+
+export const getHindiMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_hindi_page_${page}`, () =>
     tmdbApi.get("/discover/movie", {
       params: {
+        page,
         with_original_language: "hi",
         sort_by: "popularity.desc",
       },
@@ -99,10 +122,11 @@ export const getHindiMovies = () => {
   );
 };
 
-export const getEnglishMovies = () => {
-  return fetchWithCache("tmdb_english", () =>
+export const getEnglishMovies = (page = 1) => {
+  return fetchWithCache(`tmdb_english_page_${page}`, () =>
     tmdbApi.get("/discover/movie", {
       params: {
+        page,
         with_original_language: "en",
         sort_by: "popularity.desc",
       },
@@ -110,16 +134,29 @@ export const getEnglishMovies = () => {
   );
 };
 
-export const getMoviesByGenre = (genreId) => {
-  return fetchWithCache(`tmdb_genre_${genreId}`, () =>
+// Genres
+
+export const getMoviesByGenre = (genreId, page = 1) => {
+  return fetchWithCache(`tmdb_genre_${genreId}_page_${page}`, () =>
     tmdbApi.get("/discover/movie", {
       params: {
+        page,
         with_genres: genreId,
         sort_by: "popularity.desc",
       },
     }),
   );
 };
+
+// Similar Movies
+
+export const getSimilarMovies = (movieId) => {
+  return fetchWithCache(`tmdb_similar_${movieId}`, () =>
+    tmdbApi.get(`/movie/${movieId}/similar`),
+  );
+};
+
+// Search
 
 export const searchMovies = (query) => {
   const cleanQuery = query.trim();
@@ -135,11 +172,14 @@ export const searchMovies = (query) => {
   );
 };
 
+// Movie Details
+
 export const getMovieDetails = (movieId) => {
-  return tmdbApi.get(`/movie/${movieId}`, {
-    params: {
-      append_to_response: "videos,credits",
-    },
-  });
+  return fetchWithCache(`tmdb_movie_details_${movieId}`, () =>
+    tmdbApi.get(`/movie/${movieId}`, {
+      params: {
+        append_to_response: "videos,credits",
+      },
+    }),
+  );
 };
-// search

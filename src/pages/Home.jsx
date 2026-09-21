@@ -10,6 +10,9 @@ import {
   getHindiMovies,
   getEnglishMovies,
 } from "../api/tmdb";
+import Hero from "../components/Hero";
+import Footer from "../components/Footer";
+import GenreMenu from "../components/GenreMenu";
 
 function Home() {
   const [popular, setPopular] = useState([]);
@@ -58,31 +61,53 @@ function Home() {
     fetchMovies();
   }, []);
 
+  const random20 = Math.floor(Math.random() * 10);
   return (
     <div className="min-h-screen bg-[#141414] text-white">
       <Navbar />
 
-      <main className="mx-auto max-w-7xl px-6 py-8">
-        <h1 className="mb-8 text-3xl font-bold">Discover Movies</h1>
+      <Hero movie={popular[random20]} />
 
+      <main className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-8 flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Discover Movies</h1>
+
+          <GenreMenu />
+        </div>
         {loading ? (
           <p className="text-gray-400">Loading movies...</p>
         ) : (
           <>
-            <MovieRow title="Popular" movies={popular} />
-
-            <MovieRow title="Now Playing" movies={nowPlaying} />
-
-            <MovieRow title="Top Rated" movies={topRated} />
-
-            <MovieRow title="Upcoming" movies={upcoming} />
-
-            <MovieRow title="Hindi Movies" movies={hindiMovies} />
-
-            <MovieRow title="English Movies" movies={englishMovies} />
+            <MovieRow title="Popular" movies={popular} link="/movies/popular" />
+            <MovieRow
+              title="Now Playing"
+              movies={nowPlaying}
+              link="/movies/now-playing"
+            />
+            <MovieRow
+              title="Top Rated"
+              movies={topRated}
+              link="/movies/top-rated"
+            />
+            <MovieRow
+              title="Upcoming"
+              movies={upcoming}
+              link="/movies/upcoming"
+            />
+            <MovieRow
+              title="Hindi Movies"
+              movies={hindiMovies}
+              link="/movies/hindi"
+            />
+            <MovieRow
+              title="English Movies"
+              movies={englishMovies}
+              link="/movies/english"
+            />
           </>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
