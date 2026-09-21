@@ -1,64 +1,234 @@
-# Movies And Series Finder
+# 🎬 Movie Discovery App
 
-## Description
+A responsive movie discovery web application built with **React** and the **TMDB API**.
 
-Movies And Series Finder is a modern web application designed to help you discover movies and TV series effortlessly. Built using React and Tailwind CSS, this application leverages the power of APIs to fetch movie and TV series data and present it in an organized and user-friendly interface. With features such as searching for movies and TV series, filtering by popularity, now playing, top-rated, and upcoming, as well as pagination for smooth navigation through the results, Movies And Series Finder provides an immersive experience for movie enthusiasts.
+The app allows users to discover popular, upcoming, top-rated, Hindi, English, and genre-based movies. Users can also search for movies and view detailed information about individual movies.
 
-## Technologies Used
+---
 
-- **Frontend**: React, Tailwind CSS
-- **APIs**: The Movie Database (TMDB) API, Open Movie Database (OMDB) API
+## 🚀 Features
 
-## Installation
+### 🏠 Home Page
 
-Clone the repository:
+- Featured movie hero section
+- Popular Movies
+- Now Playing Movies
+- Top Rated Movies
+- Upcoming Movies
+- Hindi Movies
+- English Movies
+- Horizontal movie rows
+- Clickable movie section headings
 
-```bash
-git clone https://github.com/Ashvary1996/movie_finder.git
+### 🎭 Genre Discovery
 
-```
+Browse movies by genre:
 
-## Install dependencies:
+- Action
+- Comedy
+- Drama
+- Horror
+- Sci-Fi
 
-```bash
-cd movie_finder
+Each genre has its own dedicated page.
+
+### 📚 Movie Category Pages
+
+Dedicated pages are available for:
+
+- Popular Movies
+- Now Playing
+- Top Rated
+- Upcoming
+- Hindi Movies
+- English Movies
+
+Movies are displayed in a responsive grid layout.###
+
+♾️ Infinite Scroll
+
+Category and genre pages use infinite scrolling.
+
+Instead of traditional pagination, new movies are automatically loaded when the user reaches near the bottom of the page.
+
+### 🔎 Movie Search
+
+Users can search for movies using the TMDB search API.
+
+### 🎬 Movie Details
+
+Each movie has a dedicated details page containing information such as:
+
+- Movie poster
+- Backdrop
+- Title
+- Overview
+- Release date
+- Rating
+- Genres
+- Cast
+- Trailer / Videos
+- Similar movies
+
+### ⚡ API Caching
+
+The application uses `sessionStorage` to cache API responses for **30 minutes**.
+
+Pages are cached separately, for example:
+
+`tmdb_popular_page_1`
+
+`tmdb_popular_page_2`
+
+`tmdb_genre_28_page_1`
+
+`tmdb_genre_28_page_2`
+
+This helps reduce unnecessary API requests and improves the experience when revisiting previously loaded pages.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React 19
+- JavaScript
+- JSX
+- Tailwind CSS
+
+### Routing
+
+- React Router
+
+### API
+
+- TMDB API
+- Axios
+
+### Storage
+
+- Browser `sessionStorage` for API caching
+
+---
+
+## 📁 Project Structure
+
+src/
+│
+├── api/
+│ └── tmdb.js
+│
+├── components/
+│ ├── Navbar.jsx
+│ ├── MovieCard.jsx
+│ ├── MovieRow.jsx
+│ ├── Hero.jsx
+│ └── Footer.jsx
+│
+├── pages/
+│ ├── SearchResults.jsx
+│ ├── MovieDetails.jsx
+│ ├── GenreMovies.jsx
+│ └── MovieCategory.jsx
+│
+├── App.js
+└── index.js
+
+---
+
+## 🔀 Routes
+
+| Route               | Description     |
+| ------------------- | --------------- |
+| `/`                 | Home page       |
+| `/movie/:id`        | Movie details   |
+| `/search`           | Search results  |
+| `/genre/:genreId`   | Movies by genre |
+| `/movies/:category` | Movie category  |
+
+### Category Examples
+
+`/movies/popular`
+
+`/movies/now-playing`
+
+`/movies/top-rated`
+
+`/movies/upcoming`
+
+`/movies/hindi`
+
+`/movies/english`
+
+### Genre Examples
+
+`/genre/28` → Action
+
+`/genre/35` → Comedy
+
+`/genre/18` → Drama
+
+`/genre/27` → Horror
+
+`/genre/878` → Sci-Fi
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the repository
+
+````bash
+git clone YOUR_REPOSITORY_URL
+cd your-project-name
 npm install
-```
 
-## Env Set Up:
+````
+### Environment Variables
 
-Make sure to set up the .env file:
 
-```bash
-REACT_APP_OMDB_API_URL = https://www.omdbapi.com
-REACT_APP_OMDB_API_KEY = ***your Api KEY***
-REACT_APP_TMDB_API_URL = https://api.themoviedb.org/3
-REACT_APP_TMDB_KEY = ***your Api KEY***
+Create a `.env` file in the project root:
 
-```
 
-## Running the App::
+REACT_APP_TMDB_API_URL=https://api.themoviedb.org/3
+REACT_APP_TMDB_KEY=YOUR_TMDB_API_KEY
 
-Start the development server:
-
-```bash
+```env
 npm start
 ```
 
-### The app will typically be accessible at http://localhost:3000/ in your browser.
 
-## Usage
 
-- **Search for movies and TV series**: Enter the title of the movie or TV series you want to find in the search input field and click "Find" or press Enter.
-- **Filter movies and TV series**: Select a filter option from the dropdown menu to filter by popularity, now playing, top-rated, or upcoming.
-- **Pagination**: Use the pagination buttons to navigate through the pages of search results.
-- **View details**: View details such as release date, rating, and language.
-- **Back to Home**: Click the "Back to Home" button to return to the home page after searching for movies or TV series.
 
-## Live Link
+## 📡 TMDB API
 
-Check out the live version of the app: [Movies And Series Finder](https://movies-finder-app-v2.netlify.app/)
+This project uses the **TMDB API** to retrieve movie information.
 
-## Landing Page
-![Image Title](/src/movieandserieshome.png)
+The application uses endpoints for:
 
+- Popular movies
+- Now playing
+- Top rated
+- Upcoming
+- Movie discovery
+- Genre discovery
+- Search
+- Movie details
+- Similar movies
+
+---
+
+## 👨‍💻 Author
+
+**Ashvary Gidian**
+
+Built as a React-based movie discovery project using the TMDB API.
+
+---
+
+## 📄 License
+
+This project is for educational and personal project purposes.
+
+Movie data and images are provided by **TMDB**.
