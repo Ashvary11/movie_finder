@@ -11,7 +11,7 @@ export default function Footer() {
           TMDB.
         </p>
         <p className="mt-4 text-xs text-gray-600">
-          © {new Date().getFullYear()} Movie-Verse by Ashvary
+          © {new Date().getFullYear()} Movie-Finder by Ashvary
         </p>
       </div>
     </footer>

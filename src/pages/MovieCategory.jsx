@@ -10,6 +10,8 @@ import {
   getHindiMovies,
   getEnglishMovies,
 } from "../api/tmdb";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const categories = {
   popular: {
@@ -137,59 +139,75 @@ function MovieCategory() {
 
   if (!currentCategory) {
     return (
-      <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-        <div className="flex-1 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold mb-4">Category Not Found</h1>
+      <div className="min-h-screen bg-[#141414] text-white">
+        <Navbar />
+
+        <main className="mx-auto flex min-h-[70vh] max-w-7xl flex-col items-center justify-center px-6 py-8">
+          <h1 className="mb-4 text-3xl font-bold">Category Not Found</h1>
 
           <Link
             to="/"
-            className="bg-red-600 hover:bg-red-700 px-5 py-2 rounded"
+            className="rounded bg-gray-800 px-4 py-2 text-sm transition hover:bg-gray-700"
           >
             Back Home
           </Link>
-        </div>
+        </main>
+
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">{currentCategory.title}</h1>
+    <div className="min-h-screen bg-[#141414] text-white">
+      <Navbar />
+
+      <main className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">{currentCategory.title}</h1>
+
+            <p className="mt-2 text-gray-400">
+              Explore {currentCategory.title.toLowerCase()}
+            </p>
+          </div>
 
           <Link
             to="/"
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
+            className="rounded bg-gray-800 px-4 py-2 text-sm transition hover:bg-gray-700"
           >
             Back Home
           </Link>
         </div>
 
-        {loading ? (
-          <p className="text-center text-gray-400">Loading movies...</p>
-        ) : movies.length === 0 ? (
-          <p className="text-center text-gray-400">No movies found.</p>
-        ) : (
+        {loading && <p className="text-gray-400">Loading movies...</p>}
+
+        {!loading && movies.length === 0 && (
+          <p className="text-gray-400">No movies found.</p>
+        )}
+
+        {!loading && movies.length > 0 && (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {movies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
             </div>
 
             {loadingMore && (
-              <p className="text-center text-gray-400 py-8">
+              <p className="py-8 text-center text-gray-400">
                 Loading more movies...
               </p>
             )}
 
             {!hasMore && (
-              <p className="text-center text-gray-400 py-8">No more movies.</p>
+              <p className="py-8 text-center text-gray-400">No more movies.</p>
             )}
           </>
         )}
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
