@@ -18,12 +18,14 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-black px-6 py-4">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6">
-       
-        <Link to="/" className="text-2xl font-bold text-red-600">
+        <Link
+          to="/"
+          onClick={() => window.scrollTo(0, 0)}
+          className="text-2xl font-bold text-red-600"
+        >
           MOVIE-FINDER
         </Link>
 
-       
         <form onSubmit={handleSearch} className="flex flex-1 justify-end gap-2">
           <input
             type="text"

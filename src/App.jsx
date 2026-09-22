@@ -4,10 +4,12 @@ import MovieDetails from "./pages/MovieDetails";
 import SearchResults from "./pages/SearchResults";
 import GenreMovies from "./pages/GenreMovies";
 import MovieCategory from "./pages/MovieCategory";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
